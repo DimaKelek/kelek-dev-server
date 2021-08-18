@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node index.js",
+    "start": "node ./build/index.js",
     "start observed server": "nodemon ./src/index.ts"
   },
   "author": "kelek",
