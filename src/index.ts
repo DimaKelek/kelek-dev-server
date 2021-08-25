@@ -46,11 +46,12 @@ app.get(`/users/:userID`, (req, res) => {
         res.status(200).json(user)
         res.send(user)
     } else {
-        res.send("User not found")
+        res.send("User not found!!")
     }
 })
 
 app.post('/send', async (req, res) => {
+    debugger
     await sendMessage(req.body)
     res.send("Ok")
 })
