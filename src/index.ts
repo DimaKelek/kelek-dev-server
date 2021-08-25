@@ -6,7 +6,7 @@ import {sendMessage} from "./Features/SendMessage/send";
 const app = express()
 const PORT = process.env.PORT || 7777;
 app.use(cors({
-    origin: "https://dimakelek.github.io/portfolio"
+    origin: "https://dimakelek.github.io"
 }))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
