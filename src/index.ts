@@ -5,13 +5,18 @@ import {sendMessage} from "./Features/SendMessage/send";
 
 const app = express()
 const PORT = process.env.PORT || 7777;
+
+let allowedOrigins = ["https://localhost:3000", "https://kelek-dev-server.herokuapp.com"];
 app.use(cors({
-    origin: "https://dimakelek.github.io"
-}))
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-});
+    origin: function(origin, callback){
+        if(!origin) return callback(null, true);
+        if(allowedOrigins.indexOf(origin) === -1){
+            let msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    }
+}));
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
