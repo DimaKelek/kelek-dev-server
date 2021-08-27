@@ -12,6 +12,10 @@ const smtp_pass = process.env.SMTP_PASS || "---"
 
 const transport = nodemailer.createTransport({
     service: "gmail",
+    secure: false,
+    tls: {
+        rejectUnauthorized: false
+    },
     auth: {
         user: smtp_login,
         pass: smtp_pass
