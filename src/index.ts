@@ -6,7 +6,7 @@ import {sendMessage} from "./Features/SendMessage/send";
 const app = express()
 const PORT = process.env.PORT || 7777;
 
-let allowedOrigins = ["https://localhost:3000", "https://kelek-dev-server.herokuapp.com"];
+let allowedOrigins = ["https://localhost:3000", "https://dimakelek.github.io"];
 app.use(cors({
     origin: function(origin, callback){
         if(!origin) return callback(null, true);
