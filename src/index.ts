@@ -4,25 +4,11 @@ import bodyParser from "body-parser";
 import {sendMessage} from "./Features/SendMessage/send";
 
 const app = express()
-const PORT = process.env.PORT || 7777;
-
-// let allowedOrigins = ["https://localhost:3000", "https://dimakelek.github.io"];
-// app.use(cors(/*{
-//     origin: function(origin, callback){
-//         if(!origin) return callback(null, true);
-//         if(allowedOrigins.indexOf(origin) === -1){
-//             let msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-//             return callback(new Error(msg), false);
-//         }
-//         return callback(null, true);
-//     }
-// }*/));
-// app.options('*', cors());
-app.use(cors({
-    origin: "http://localhost:3000"
-}));
+app.use(cors({origin: "http://localhost:3000" || "https://dimakelek.github.io"}));
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
+const PORT = process.env.PORT || 7777;
 
 type UserType = {
     id: string
@@ -49,12 +35,10 @@ app.get('/', (req, res) => {
          <div>Telegram: <a href="https://t.me/KelekOfficial">https://t.me/KelekOfficial</a></div>`
     )
 })
-
 app.get('/users', (req, res) => {
     res.status(200).json(USERS)
     res.send(USERS)
 })
-
 app.get(`/users/:userID`, (req, res) => {
     const user = USERS.users.find(u => u.id === req.params.userID)
     if(user) {
@@ -68,10 +52,16 @@ app.get(`/users/:userID`, (req, res) => {
 app.post('/send', async (req, res) => {
     try {
         await sendMessage(req.body)
-        res.status(200).json({})
-        res.send("Ok")
+        res.status(200).json({
+            your_request: req.body,
+            status: "Message has been send"
+        })
     } catch (e) {
-        res.status(501).json({errors: e})
+        res.status(501).json({
+            your_request: req.body,
+            errors: [e.response],
+            status: "Oh, something wrong"
+        })
     }
 
 })

@@ -7,10 +7,10 @@ type RequestBodyType = {
     message?: string
 }
 
-let smtp_login = process.env.SMTP_LOGIN || "fenixpwtera@gmail.com"
-let smtp_pass = process.env.SMTP_PASS || "7122054arnold"
+const smtp_login = process.env.SMTP_LOGIN || "---"
+const smtp_pass = process.env.SMTP_PASS || "---"
 
-let transport = nodemailer.createTransport({
+const transport = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: smtp_login,
