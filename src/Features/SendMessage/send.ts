@@ -27,7 +27,7 @@ export const sendMessage = async (body: RequestBodyType) => {
     await transport.sendMail({
         from: name,
         to: "kelekofficial@gmail.com",
-        subject: "HR WANTS ME",
+        subject: "HR WANTS ME!!",
         html: `<div style="width: 300px; height: 400px; background-color: #9890C7; padding: 25px;">
                 <div style="height: 100%;">
                     <h3 style="color: #0c0c0c; text-align: center;">New Message!!</h3>
