@@ -17,6 +17,7 @@ app.use(cors({
         return callback(null, true);
     }
 }));
+app.options('*', cors());
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
