@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import {sendMessage} from "./Features/SendMessage/send";
 
 const app = express()
-app.use(cors({origin: "http://localhost:3000" || "https://dimakelek.github.io"}));
+app.use(cors({origin: "https://dimakelek.github.io"}));
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
