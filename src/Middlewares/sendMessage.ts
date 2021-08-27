@@ -5,10 +5,11 @@ export const requestsHandler = (req: RequestBodyType, e?: any) => {
     let statusCode: number
     if(e.code) {
         statusCode = 1
-        // if (e.code === "EAUTH") {
-        //     errors.push("535-5.7.8 Username and Password not accepted.")
-        // }
-        errors.push(e)
+        if (e.responseCode === 534) {
+            errors.push("Code 534-5.7.14 Access denied")
+        } else if(e.responseCode === 535) {
+            errors.push("Code 535-5.7.8 Username and Password mail service not accepted.")
+        }
     } else {
         statusCode = 0
     }
