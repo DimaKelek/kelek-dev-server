@@ -65,9 +65,9 @@ app.get(`/users/:userID`, (req, res) => {
     }
 })
 
-app.post('/send', (req, res) => {
+app.post('/send', async (req, res) => {
     try {
-        sendMessage(req.body)
+        await sendMessage(req.body)
         res.status(200).json({})
         res.send("Ok")
     } catch (e) {
