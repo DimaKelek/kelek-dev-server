@@ -2,6 +2,8 @@ import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser";
 import {sendMessage} from "./Features/SendMessage/send";
+import {requestsHandler} from "./Middlewares/sendMessage";
+import {v1} from "uuid";
 
 const app = express()
 app.use(cors({origin: "https://dimakelek.github.io"}));
@@ -20,10 +22,10 @@ type UsersType = {
 }
 const USERS: UsersType = {
     users: [
-        {id: "1", name: "Kelek", status: null},
-        {id: "2", name: "Ira", status: null},
-        {id: "3", name: "Vitalik", status: null},
-        {id: "4", name: "Artur", status: null}
+        {id: v1(), name: "Kelek", status: null},
+        {id: v1(), name: "Ira", status: null},
+        {id: v1(), name: "Vitalik", status: null},
+        {id: v1(), name: "Artur", status: null}
     ]
 }
 
@@ -52,18 +54,10 @@ app.get(`/users/:userID`, (req, res) => {
 app.post('/send', async (req, res) => {
     try {
         await sendMessage(req.body)
-        res.status(200).json({
-            your_request: req.body,
-            status: "Message has been send"
-        })
+        res.status(200).json(requestsHandler(req.body))
     } catch (e) {
-        res.status(501).json({
-            your_request: req.body,
-            errors: [e.response],
-            status: "Oh, something wrong"
-        })
+        res.status(200).json(requestsHandler(req.body, e))
     }
-
 })
 
 app.listen(PORT, () => {

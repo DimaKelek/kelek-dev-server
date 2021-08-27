@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-type RequestBodyType = {
+export type RequestBodyType = {
     name: string
     email: string
     subject: string
