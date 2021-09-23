@@ -7,8 +7,8 @@ export type RequestBodyType = {
     message?: string
 }
 
-const smtp_login = process.env.SMTP_LOGIN || "fenixpwtera@gmail.com"
-const smtp_pass = process.env.SMTP_PASS || "7122054arnold"
+const smtp_login = process.env.SMTP_LOGIN || "---"
+const smtp_pass = process.env.SMTP_PASS || "---"
 
 const transport = nodemailer.createTransport({
     service: "gmail",
